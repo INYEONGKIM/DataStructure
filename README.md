@@ -119,11 +119,7 @@ Heap은 free storage block의 정보를 나타내는 Node<Block>을 doubly linke
 
 각 Block은 (size, free block start address, free block end address)의 tuple 구조를 갖는다.
 
-
-
 Free block 관리 규칙은 다음과 같다:
-
-
 
 (1) Linked List의 각 Node는 block 주소가 증가하는 순서로 관리한다.
 
@@ -144,10 +140,54 @@ Block b1 = manager.malloc(200)    // b1 = Block(200, 0, 199)
 
 3. 메모리 크기 300, 150, 200을 연속으로 요청 받은 이후 free block list의 상태:
 
-
-
 Block b2 = manager.malloc(300)    // b2 = Block(300, 200, 499)
 
 Block b3 = manager.malloc(150)    // b3 = Block(150, 500, 649)
 
 Block b4 = manager.malloc(200)    // b4 = Block(200, 650, 849)
+
+4. 할당 받았던 block b2 (Block(300, 200, 499)) 반환 처리 이후 free block list의 상태:
+
+manager.free(b2)
+
+5. 할당 받았던 block b3 (Block(150, 500, 649)) 반환 처리 이후 free block list의 상태:
+
+manager.free(b3)
+
+# HW4
+문제 1.
+(1) 십진수를 이진수로 변환하여 출력하는 아래의 method를 stack을 이용하여 작성 하세요. 파라미터는 항상 non-negative integer라고 가정합니다. (힌트: 변환과정에서 이진수가 역순으로 생성되기 때문에 변환과정 중 생성되는 binary digit를 stack에 저장하였다가, 변환이 종료된 후에 stack에 저장된 값을 차례로 출력한다.)
+deciTobin(10) --> 1010
+deciTobin(0) --> 0
+deciTobin(17) --> 10001
+
+(2) 위 문제를 stack 대신 recursion을 이용해 작성하세요. (힌트: System.out.print 문장의 위치를 정하는 것이 관건임)
+public class DecimalToBinary {
+ // using stack
+ public void deciTobin(int n) {
+ ...
+ }
+
+ // using recursion
+ public void deciTobinRec(int n) {
+ ...
+ }
+}
+
+문제 2.
+아래 그림과 같이 integer를 포함하고 있는 box로 구성된 퀴즈 문제를 고려해 봅시다.
+첫번째 box의 원은 좌우로 이동할 수 있는 marker입니다. 매 단계마다, box 안에 있는 숫자만큼 왼쪽 또는 오른쪽으로 이동시킬 수 있지만, 맨 앞 또는 맨 뒤의 box를 벗어나서는 안됩니다.
+위 그림을 예로 들면, 현재 원의 위치에서는 왼쪽으로는 이동 할 수 없기 때문에 오른쪽으로 세 칸 이동하는 것 만이 유일한 방법입니다. 이 퀴즈의 목적은 원을 맨 오른쪽 0이 들어 있는 box로 이동 시키는 것이 가능한지를 판단하는 것입니다. 위의 그림에서 시작한다면 아래 그림과 같은 순서로 이동하여 도달하는 것이 가능합니다.
+예제로 주어진 문제에서는 해결 방법이 존재 (단, 다른 가능한 이동 방법도 여럿 존재 할 수 있음) 하지만, 다음 그림과 같이 주어진다면, 목적지에 도달하기 위한 방법이 존재하지 않을수도 있습니다.
+이 그림에서는 두 3 사이에서 쳇바퀴 돌 뿐, 다른 box로의 이동이 불가하게 됩니다.
+Integer list (boxes)와 시작 위치 (start)가 주어졌을 때, 주어진 시작 위치에서 목적지(즉, 맨 오른쪽 0이 들어 있는 box)에 도달 할 수 있는 지의 여부를 판단하는 아래의 method를 작성하십시요.
+
+public class Quiz {
+
+ boolean Solve(int start, int[] boxes) {
+ ...
+ }
+}
+
+box에 포함되는 숫자는 맨 오른쪽 0이 포함된 box를 제외 하고 모두 positive number라고 가정하기 바랍니다.
+(주의) 함수가 수행되는 동안된 box안의 숫자가 바뀌어서는 안됩니다!
