@@ -1,7 +1,8 @@
 # DataStructure
 2018-1 Data Structure HW
 
-#HW1
+# HW1
+
 In this homework, you are required to complete the one-dimentioanl Sparse Matrix ADT for two dimensional array of doubles.
 
 
@@ -74,10 +75,9 @@ Junit Tutorial:
 
   - http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
 
-#HW2
+# HW2
+
 DLinkedList.java화일을 완성하시오.
-
-
 
 유의 사항:
 
@@ -89,14 +89,9 @@ DLinkedList.java화일을 완성하시오.
 
 (4) toString() method는 수정 할 수 없습니다.
 
-
-
 Part II. (Part I.)에서 구현한 DLinkedList를 이용하여 Memory Manager 구현하기
 
-
-
 Node.java, OutOfMemoryException.java는 그대로 수정 없이 사용하고,  MemoryManager.java는 나머지 부분을 완성하시오.
-
 
 
 MemoryManager의 기본 API:
@@ -117,19 +112,10 @@ MemoryManager의 기본 API:
 
 (3) 기존의 public methods (malloc, free, getHeap, toString) 이외의 추가 public method는 정의 할 수 없습니다. 단, private method는 필요 한 경우 추가로 정의하여 MemoryManager 내부에서 사용 할 수 있습니다.
 
- 
 
 Heap 관리 방법
 
-
-
 Heap은 free storage block의 정보를 나타내는 Node<Block>을 doubly linked list로 관리한다. 각 Node<Block>의 구조는 다음과 같다: 실제 Node의 구조는 (item, prev, next)이지만 편의상 아래와 같이 도식화 한다. item field는 Block 정보를 나타낸다.
-
-
-
-그림입니다.
-원본 그림의 이름: CLP0000108c0001.bmp
-원본 그림의 크기: 가로 297pixel, 세로 190pixel
 
 각 Block은 (size, free block start address, free block end address)의 tuple 구조를 갖는다.
 
@@ -145,50 +131,15 @@ Free block 관리 규칙은 다음과 같다:
 
 (3) free에 의해 반납된 block이 free list에 추가될 경우, 반납된 free block을 free list의 해당 위치에 삽입한다. 단, 새로 삽입된 free block이 기존의 free block과 인접한 경우, 하나의 free block으로 병합(merge)되어야 한다.
 
-
-
-Before merge:
-
-그림입니다.
-원본 그림의 이름: CLP0000108c0002.bmp
-원본 그림의 크기: 가로 884pixel, 세로 226pixel
-
-그림입니다.
-원본 그림의 이름: CLP00000e4423dd.bmp
-원본 그림의 크기: 가로 513pixel, 세로 226pixelAfter merge
-
 실행 시나리오.
-
-
 
 1. Free block list의 초기 상태 (free storage의 용량을 1000으로 가정)
 
-
-
 MemoryManager manager = new MemoryManager(1000);
-
-그림입니다.
-원본 그림의 이름: CLP00000be82c88.bmp
-원본 그림의 크기: 가로 513pixel, 세로 226pixel
-
-
 
 2. 메모리 크기 200을 요청한다.
 
-
-
 Block b1 = manager.malloc(200)    // b1 = Block(200, 0, 199)
-
-
-
-메모리(200)의 요청이 성공 한 이후 free block list의 상태:
-
-그림입니다.
-원본 그림의 이름: CLP00000be80002.bmp
-원본 그림의 크기: 가로 513pixel, 세로 226pixel
-
-
-
 
 
 3. 메모리 크기 300, 150, 200을 연속으로 요청 받은 이후 free block list의 상태:
@@ -200,37 +151,3 @@ Block b2 = manager.malloc(300)    // b2 = Block(300, 200, 499)
 Block b3 = manager.malloc(150)    // b3 = Block(150, 500, 649)
 
 Block b4 = manager.malloc(200)    // b4 = Block(200, 650, 849)
-
-
-
-그림입니다.
-원본 그림의 이름: CLP00001af43aee.bmp
-원본 그림의 크기: 가로 513pixel, 세로 226pixel
-
-4. 할당 받았던 block b2 (Block(300, 200, 499)) 반환 처리 이후 free block list의 상태:
-
-manager.free(b2)
-
-그림입니다.
-원본 그림의 이름: CLP00001af40003.bmp
-원본 그림의 크기: 가로 701pixel, 세로 226pixel
-
-5. 할당 받았던 block b3 (Block(150, 500, 649)) 반환 처리 이후 free block list의 상태:
-
-manager.free(b3)
-
-
-
-그림입니다.
-원본 그림의 이름: CLP00001af40004.bmp
-원본 그림의 크기: 가로 884pixel, 세로 226pixel
-
-
-
-b2 block과 b3 block이 주소가 연속된 block이므로 하나의 free block으로 merge 함.그림입니다.
-원본 그림의 이름: CLP00001af40005.bmp
-원본 그림의 크기: 가로 883pixel, 세로 504pixel
-
-그림입니다.
-원본 그림의 이름: CLP00001af40006.bmp
-원본 그림의 크기: 가로 701pixel, 세로 226pixel
